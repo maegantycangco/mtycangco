@@ -1,0 +1,68 @@
+def printWinMessage():
+    print("Congratulations! You win!")
+
+def printLoseMessage():
+    print("SORRY! YOU ARE HANGED!")
+
+def toBlanks(word):
+    return '-' * len(word)
+
+def combine(letters):
+    return ''.join(letters)
+
+def makeGumess(guess, letter):
+    lettersGuessed = list(guess)
+    for n in range((len(secretword))):
+        if secretword[n] == letter:
+            lettersGuessed[n] = letter
+    return combine(lettersGuessed)
+
+def remove(items, toRemove):
+    for letter in toRemove:
+        items.remove(letter)
+
+
+def lettersUsed(letter):
+    mistakesMade.extend(letter)
+
+
+ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+print("Please enter a word for the other player to guess:")
+secretword = input().upper()
+mistakesMade = []
+'clear'
+
+maxGuesses = 6
+guess = toBlanks(secretword)
+
+numGuessesLeft = maxGuesses
+
+while guess != secretword:
+    print("Unused letters:", combine(ALPHABET))
+    print('Letters already guessed: ' + ''.join(mistakesMade))
+    print("Guess the word,", numGuessesLeft, "guess(es) left:", guess)
+    newLetter = input().upper()
+
+    if newLetter in ALPHABET:
+        lettersUsed(newLetter)
+        remove(ALPHABET, newLetter)
+
+        if newLetter in secretword:
+            guess = makeGuess(guess, newLetter)
+
+        elif newLetter not in secretword:
+            print('Letter is not in word!')
+            numGuessesLeft -= 1
+
+    else:
+        print('Letter already guessed! Please guess another letter.')
+
+    if guess == secretword:
+        printWinMessage()
+        print('The word was: ' + secretword)
+        break
+    elif numGuessesLeft == 0:
+        printLoseMessage()
+        print('The word was: ' + secretword)
+        break
