@@ -5,12 +5,12 @@ def printLoseMessage():
     print("SORRY! YOU ARE HANGED!")
 
 def toBlanks(word):
-    return '-' * len(word)
+    return '_' * len(word)
 
 def combine(letters):
     return ''.join(letters)
 
-def makeGumess(guess, letter):
+def isWordGuessed(guess, letter):
     lettersGuessed = list(guess)
     for n in range((len(secretword))):
         if secretword[n] == letter:
@@ -49,7 +49,7 @@ while guess != secretword:
         remove(ALPHABET, newLetter)
 
         if newLetter in secretword:
-            guess = makeGuess(guess, newLetter)
+            guess = isWordGuessed(guess, newLetter)
 
         elif newLetter not in secretword:
             print('Letter is not in word!')
@@ -66,3 +66,5 @@ while guess != secretword:
         printLoseMessage()
         print('The word was: ' + secretword)
         break
+
+
