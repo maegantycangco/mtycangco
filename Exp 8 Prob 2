@@ -1,0 +1,13 @@
+import pandas as pd
+df = pd.read_csv('cars.csv')
+X = df.head(10)
+Y = X.drop(['Model','cyl','hp','wt','vs','gear'], axis = 1) 
+print (Y)
+print (df.ix[1])
+print(df.iloc[[23],[2]])
+M = df.loc[df['Model']=='Mazda RX4 Wag',['cyl','gear']]
+N = df.loc[df['Model']=='Ford Pantera L',['cyl','gear']]
+O = df.loc[df['Model']=='Honda Civic',['cyl','gear']]
+print (M)
+print (N)
+print (O)
